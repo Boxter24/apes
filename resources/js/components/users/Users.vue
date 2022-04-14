@@ -144,7 +144,6 @@
         },
         data() {
             return {                
-                users : {},
                 editmode: false,
                 users : {},
                 form: new Form({
@@ -202,7 +201,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Si, Borrar!'
                     }).then((result) => {
                     if (result.isConfirmed) {
                         this.form.delete('api/user/'+id).then(()=>{

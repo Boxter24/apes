@@ -9,6 +9,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+Vue.use(Vuetify)
+
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
@@ -58,11 +62,15 @@ Vue.use(VueProgressBar, {
 })
 
 let routes = [
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },    
+    //VISTAS USUARIOS
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },        
+    { path: '/profile', component: require('./components/users/Profile.vue').default },
+    { path: '/cursos-complementarios', component: require('./components/cursos_complementarios/Cursos_complementarios.vue').default },    
+    //VISTAS ADMIN
     { path: '/users', component: require('./components/users/Users.vue').default },    
-    { path: '/profile', component: require('./components/users/Profile.vue').default },
-    { path: '/developer', component: require('./components/users/Developer.vue').default}, 
-    { path: '/profile', component: require('./components/users/Profile.vue').default },
+    { path: '/developer', component: require('./components/users/Developer.vue').default},     
+    { path: '/categorias', component: require('./components/categorias/Categorias.vue').default },
+    //{ path: '/programas', component: require('./components/users/Programas.vue').default },
 ]
 
 const router = new VueRouter({
@@ -103,6 +111,9 @@ Vue.component(
  */
 
 const app = new Vue({
+    vuetify: new Vuetify(),
     el: '#app',
     router
 });
+
+

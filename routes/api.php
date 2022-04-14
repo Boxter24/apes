@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CategoriasController;
 use Illuminate\Http\Request;
 
 /*
@@ -21,3 +22,6 @@ Route::apiResources(['user' => 'API\UserController']);
 Route::get('profile', 'API\UserController@profile');
 Route::get('/', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
+
+Route::resource('categorias', API\CategoriasController::class);
+

@@ -5,12 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CodeTeka</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.png') }}">
+    <title>APES</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <!--Styles-->
     <link rel="stylesheet" href="/css/app.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="app">
@@ -38,15 +41,15 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="./img/logo.png" alt="Codeteka Logo" class="brand-image img-circle elevation-3"
+                <img src="./img/logo.png" alt="APES Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">CodeTeka</span>
+                <span class="brand-text font-weight-light">APES</span>
             </a>
 
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('img/profile/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('img/profile/'.Auth::user()->foto) }}" class="img-circle elevation-2" alt="User">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -62,7 +65,7 @@
                             <router-link to="/dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt blue"></i>
                                 <p>
-                                    Dashboard                                    
+                                    Inicio                                    
                                 </p>
                             </router-link>
                         </li>
@@ -71,29 +74,35 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cog green"></i>
                                 <p>
-                                    Management
+                                    Administración
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview adminlink ml-4">
                                 <li class="nav-item">
                                     <router-link to="/users" class="nav-link">
                                         <i class="fas fa-users nav-icon"></i>
-                                        <p>Users</p>
+                                        <p>Usuarios</p>
                                     </router-link>
                                 </li>
-                
+                                <li class="nav-item">
+                                    <router-link to="/developer" class="nav-link">
+                                        <i class="nav-icon fas fa-cogs purple"></i>
+                                        <p>
+                                            Desarrolladores                                    
+                                        </p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/categorias" class="nav-link">
+                                        <i class="nav-icon fas fa-list-alt teal"></i>
+                                        <p>
+                                            Categorias                                    
+                                        </p>
+                                    </router-link>
+                                </li>                                
                             </ul>
-                        </li>
-                                                
-                        <li class="nav-item">
-                            <router-link to="/developer" class="nav-link">
-                                <i class="nav-icon fas fa-cogs purple"></i>
-                                <p>
-                                    Developer                                    
-                                </p>
-                            </router-link>
-                        </li>
+                        </li>                                                                                                
                         @endcan
                         <li class="nav-item">
                             <router-link to="/profile" class="nav-link">
@@ -102,7 +111,17 @@
                                     Profile                                    
                                 </p>
                             </router-link>
-                        </li>
+                        </li> 
+
+                        <li class="nav-item">
+                            <router-link to="/cursos-complementarios" class="nav-link">
+                                <i class="nav-icon fas fa-user-graduate pink"></i>
+                                <p>
+                                    Cursos Complementarios                                    
+                                </p>
+                            </router-link>
+                        </li>                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -143,9 +162,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-inline">
-                Jose Quintero - Julio Trigo - Salvador Leal
+                APES
             </div>
-            <strong>Copyright &copy; 2022 <a href="https://adminlte.io">CodeTeka.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2022 <a href="https://github.com/Boxter24/CodeTeka">APES.io</a>.</strong> All rights reserved.
         </footer>
     </div>
 

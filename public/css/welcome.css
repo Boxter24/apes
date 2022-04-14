@@ -1,0 +1,12 @@
+.main{
+    background-image: url('/img/welcome_fondo.png');
+    width: 90%;
+    height: 200vh;
+    background-position: center top;
+    background-size:cover;
+    background-position: center center;
+    margin: auto;
+    padding: 0;
+}
+
+

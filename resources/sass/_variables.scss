@@ -9,6 +9,7 @@ $line-height-base: 1.6;
 
 // Colors
 $blue: #3490dc;
+$pink: #d606da; 
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66D9b;
@@ -21,6 +22,9 @@ $cyan: #6cb2eb;
 
 .blue{
     color: $blue;
+}
+.pink{
+    color: #d606da;
 }
 .indigo{
     color: $indigo;
