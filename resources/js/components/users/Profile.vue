@@ -186,6 +186,7 @@
             },
             updateProfile(e){
                 let file = e.target.files[0];
+                console.log(file);
                 let reader = new FileReader();
                 let limit = 1024 * 1024 * 2;
                 if(file['size'] > limit){
@@ -197,6 +198,7 @@
                     return false;
                 }
                 reader.onloadend = (file) => {
+                    //console.log(reader.result);
                     this.form.foto = reader.result;
                 }
                 reader.readAsDataURL(file);

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarrerasTable extends Migration
+class CreateForosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateCarrerasTable extends Migration
      */
     public function up()
     {
-        Schema::create('carreras', function (Blueprint $table) {
+        Schema::create('foros', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_carrera');
-            $table->string('descripcion_carrera')->nullable();    
-            $table->unsignedInteger('id_categoria');
+            $table->string('nombre_foro');
+            $table->longText('comentario_foro');
+            $table->unsignedInteger('id_usuario');
 
-            $table->foreign('id_categoria')
-                  ->references('id')->on('categorias')
+            $table->foreign('id_usuario')
+                  ->references('id')->on('users')
                   ->nullable()                  
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
@@ -34,6 +34,6 @@ class CreateCarrerasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carreras');
+        Schema::dropIfExists('foros');
     }
 }

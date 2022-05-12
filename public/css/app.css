@@ -13118,6 +13118,14 @@ a.text-muted:hover {
   color: #6cb2eb;
 }
 
+.brown {
+  color: #b08539;
+}
+
+.mixto {
+  color: linear-gradient(40deg, #a00586, #f856cf);
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -34390,7 +34398,7 @@ readers do not read off random characters that represent icons */
 }
 
 .router-link-exact-active {
-  background-color: #3f51b5;
+  background: linear-gradient(40deg, #2105a0, #0865f0);
   color: #fff !important;
 }
 

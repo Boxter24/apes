@@ -63,14 +63,38 @@ Vue.use(VueProgressBar, {
 
 let routes = [
     //VISTAS USUARIOS
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },        
-    { path: '/profile', component: require('./components/users/Profile.vue').default },
-    { path: '/cursos-complementarios', component: require('./components/cursos_complementarios/Cursos_complementarios.vue').default },    
+    { path: '/inicio', component: require('./components/Inicio.vue').default },    
+    { path: '/perfil', component: require('./components/users/Profile.vue').default },
+
     //VISTAS ADMIN
-    { path: '/users', component: require('./components/users/Users.vue').default },    
-    { path: '/developer', component: require('./components/users/Developer.vue').default},     
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },        
+
+    //ADMINISTRACION
+    { path: '/usuarios', component: require('./components/users/Users.vue').default },    
+    { path: '/desarrollador', component: require('./components/users/Developer.vue').default}, 
+
+    { path: '/crearFacultad', component: require('./components/facultades/CrearFacultad.vue').default },
+    { path: '/facultades', component: require('./components/facultades/Facultades.vue').default },
+
+    { path: '/crearCarrera', component: require('./components/carreras/CrearCarrera.vue').default },
+    { path: '/carreras', component: require('./components/carreras/Carreras.vue').default },
+
+    { path: '/crearCategoria', component: require('./components/categorias/CrearCategoria.vue').default },
     { path: '/categorias', component: require('./components/categorias/Categorias.vue').default },
-    //{ path: '/programas', component: require('./components/users/Programas.vue').default },
+
+    { path: '/crearSeccion', component: require('./components/secciones/CrearSeccion.vue').default },
+    { path: '/secciones', component: require('./components/secciones/Secciones.vue').default },        
+
+    { path: '/crearInformacion', component: require('./components/informaciones/crearInformacion.vue').default },
+    { path: '/informaciones', component: require('./components/informaciones/Informaciones.vue').default },
+
+    { path: '/foros', component: require('./components/foros/Foros.vue').default },
+    
+    //PERSONALIZACION
+    { path: '/carrusel', component: require('./components/personalizacion/Carrusel.vue').default },
+    { path: '/colores', component: require('./components/personalizacion/Colores.vue').default },
+    { path: '/detalles', component: require('./components/personalizacion/Detalles.vue').default },    
+    
 ]
 
 const router = new VueRouter({
@@ -84,6 +108,7 @@ Vue.filter('upText', function(text){
 
 window.Fire =  new Vue();
 
+//COMPONENTES
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue').default
@@ -103,6 +128,11 @@ Vue.component(
     'not-found',
     require('./components/users/NotFound.vue')
 );
+Vue.component(
+    'option-navbar',
+    require('./components/OptionNavbar.vue').default
+);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -110,9 +140,9 @@ Vue.component(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    vuetify: new Vuetify(),
+const app = new Vue({    
     el: '#app',
+    vuetify: new Vuetify(),
     router
 });
 

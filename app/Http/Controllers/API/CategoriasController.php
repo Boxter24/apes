@@ -34,11 +34,16 @@ class CategoriasController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id_categoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
+
+        \Image::make($request->foto)->save(public_path('img/categorias/').$name);
+        $request->merge(['foto' => $name]); 
+
         $categoria = Categorias::create($request->post());
 
         return response()->json([
@@ -49,7 +54,7 @@ class CategoriasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id_categoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Categorias $categoria)
@@ -60,7 +65,7 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id_categoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id_categoria)
@@ -73,10 +78,18 @@ class CategoriasController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * @param  int  $id_categoria
+     * @param  int  $id
      */
     public function update(Request $request, Categorias $categoria)
-    {
+    {   
+        //Verificar si la foto esta en base64
+        if(strlen($request->foto)  > 20){
+            $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
+
+            \Image::make($request->foto)->save(public_path('img/categorias/').$name);
+            $request->merge(['foto' => $name]);
+        } 
+
         $categoria->update($request->all());
 
         return ['message' => "Success"];
@@ -85,7 +98,7 @@ class CategoriasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id_categoria
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Categorias $categoria)

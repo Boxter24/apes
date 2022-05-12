@@ -15,8 +15,17 @@ class CreateCarrerasTable extends Migration
     {
         Schema::create('carreras', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-        });
+            $table->string('nombre_carrera');
+            $table->string('descripcion_carrera')->nullable();
+            $table->string('foto')->default('carrera.png');    
+            $table->unsignedInteger('id_facultad');
+
+            $table->foreign('id_facultad')
+                  ->references('id')->on('facultades')
+                  ->nullable()                  
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+        });        
     }
 
     /**

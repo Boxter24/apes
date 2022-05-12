@@ -12,15 +12,19 @@
 */
 
 use Illuminate\Routing\Router;
+//WELCOME
+Route::get('/', 'WelcomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' )->name('inicio');
+    
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//AUTENTICACION
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
+//User
+Route::get('/inicio','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' )->name('inicio');
+//Admin
+Route::get('/home','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' )->name('home');
+//Rutas generales
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' );
+
+
 
 

@@ -1,12 +1,45 @@
-.main{
+#app{
+  background: #ada996; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.mainFondo{
     background-image: url('/img/welcome_fondo.png');
-    width: 90%;
-    height: 200vh;
+    width: 100%;
+    height: 100vh;
     background-position: center top;
     background-size:cover;
-    background-position: center center;
-    margin: auto;
+    background-position: center center;    
     padding: 0;
 }
 
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #ff512f; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ff512f, #f09819); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ff512f, #f09819); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;               
+}
+div.loader img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;                
+    animation: rotation 1.5s infinite linear;
+}   
 
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }

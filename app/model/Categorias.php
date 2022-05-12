@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorias extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
-        'nombre_categoria', 'descripcion_categoria' ,
-    ];
-    public function getKeyName(){
-        return "id_categoria";
-    }
+        'nombre_categoria', 'descripcion_categoria', 'foto',
+    ];    
 }

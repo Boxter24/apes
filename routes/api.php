@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\CategoriasController;
+use App\Http\Controllers\API\FacultadesController;
+use App\Http\Controllers\API\CarrerasController;
 use Illuminate\Http\Request;
 
 /*
@@ -24,4 +26,23 @@ Route::get('/', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
 
 Route::resource('categorias', API\CategoriasController::class);
+
+Route::resource('facultades', API\FacultadesController::class);
+
+Route::resource('carreras', API\CarrerasController::class);
+
+Route::resource('secciones', API\SeccionesController::class);
+
+Route::resource('detalles', API\DetallesController::class);
+
+Route::resource('colores', API\ColoresController::class);
+
+Route::resource('carrusel', API\CarruselController::class);
+
+Route::resource('informaciones', API\InformacionesController::class);
+
+Route::resource('foros', API\ForosController::class)->middleware('auth:api');
+
+
+
 

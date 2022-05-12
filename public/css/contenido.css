@@ -1,0 +1,55 @@
+.loading{
+    margin-top: 10em!important;
+}
+
+.contenido{
+    margin-top: 2.5em!important;
+}
+
+.titulo-seccion{
+    font-family: 'Alfa Slab One', cursive;
+}
+
+.info{    
+    display: block;
+    width: 70%;
+}
+
+.theme--light.v-divider{
+    margin: 0;
+}
+
+.carrusel{
+    margin-top: 7%;
+}
+
+.form-group{
+    padding: 10px;
+}
+
+.v-icon.v-icon{
+    margin-right: 10px;
+}
+
+#titulo-card{
+    font-size: 1.3rem!important;
+}
+
+#text-card{
+    font-size: 1.1rem!important;
+}
+
+.v-application p {
+    margin-bottom: 0px!important;
+}
+
+.datos{
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.card-tools{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1em;
+}

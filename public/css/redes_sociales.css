@@ -1,0 +1,54 @@
+.redes_sociales {
+	left: 0; /* Sirve para que la bara quede en la izquierda */
+	position: fixed; /* Sirve para que quede fijo osea pegajoso*/
+	top: 15%; /* Bajamos la barra 200px de arriba a abajo */
+	z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
+}
+
+.ul {
+	list-style: none;
+}
+
+.links {
+	/*background-color: #000000;*/
+	color: #ffffff;
+	display: inline-block;
+	height: calc(100px - 40px);
+	line-height: calc(100px - 80px);
+	padding: 20px 20px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 300ms ease;
+	width: calc(100px - 40px);
+	/* Establecemos una transición a todas las propiedades */
+}
+
+.links:hover {
+	/*background-color: rgba(0, 0, 0, 0.6);  Cambiamos el fondo cuando se hace hover */
+	padding: 20px 60px; /* Hacemos mas grande el espacio cuando se hace hover */
+}
+a:focus, a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+/* Establecemos los colores de cada red social, aprovechando su clase */
+.fa-facebook {
+	background-color: #1a0592;
+} 
+
+.fa-twitter {
+	background-color: #1d83e2;
+}
+
+.fa-instagram {
+	background-color: #770e5d;
+}
+
+.fa-google {
+	background-color: #e9ec14;
+}
+
+.fa-envelope {
+	background-color: #d10404;
+}

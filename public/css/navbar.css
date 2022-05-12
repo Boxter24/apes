@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-html,
-body{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;        
 }
+
 
 /* Navbar section */
 
@@ -16,7 +16,7 @@ body{
     position: fixed;
     line-height: 65px;
     text-align: center;
-    
+    z-index: 1;
 }
 
 .nav div.logo {
@@ -65,60 +65,43 @@ body{
     padding-right: 2rem;
 }
 
-.nav div.main_list ul li a {
+.nav div.main_list ul li a{
     text-decoration: none;
     color: #fff;
     line-height: 65px;
     font-size: 1.5em;
 }
-
-.nav div.main_list ul li a:hover {
-    color: #00E676;
+.nav div.main_list ul li .option-input{
+    text-decoration: none;
+    color: #fff;
+    line-height: 65px;
+    font-size: 1.5em;
+    margin-top: 12px;
 }
 
-
-
+.nav div.main_list ul li a:hover{
+    color: #ff5e14;
+}
+.nav div.main_list ul li .option-input:hover {
+    color: #ff5e14;
+}
 .navTrigger {
     display: none;
 }
 
 .nav {
-    padding-top: 20px;
+    padding-top: 5px;
     padding-bottom: 20px;
     -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease;    
 }
 
-
-/* Media query section */
-@media screen and (min-width: 1024px) and (max-width: 1400px) {
-    .container {
-        margin: 0;
-    }   
-    ul.navlinks{
-        position: absolute;
-        top: 4;
-        left:50%;
-    }
-}
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    .container {
-        margin: 0;
-    }   
-    ul.navlinks{
-        position: absolute;
-        top: 4;
-        left:40%;
-    }
-}
 
 @media screen and (max-width:768px) {
     .navTrigger {
         display: block;
     }
-    .nav div.logo {
-        margin-left: 15px;
-    }
+    
     .nav div.main_list {
         width: 20em;
         border-top-left-radius: 10px;
@@ -127,7 +110,8 @@ body{
         overflow: hidden;      
         position: absolute;
         right: 0;
-        top: 5em;       
+        top: 5em;   
+        z-index: 9999999;    
     }
     .nav div.show_list {
         height: auto;
@@ -154,6 +138,11 @@ body{
         font-size: 2rem;
         padding: 20px;
     }
+    .nav div.main_list ul li .option-input{
+        margin-top: 0.5em;
+        font-size: 2rem;
+        margin-left: 35px;
+    }
     .nav div.media_button {
         display: block;
     }
@@ -169,7 +158,7 @@ body{
     margin: auto;
     position: absolute;
     right: 30px;
-    top: 0;
+    top: 1.5em;
     bottom: 0;
 }
 
@@ -353,8 +342,8 @@ body{
 
 .affix {
     padding: 0;
-    background-color: #010813;
-    height: 5em;
+    background-color: #151414;
+    height: 6em;
 }
 
 

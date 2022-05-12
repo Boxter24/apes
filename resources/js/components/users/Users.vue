@@ -1,59 +1,49 @@
 <template>
     <div class="container">
         <div class="row mt-5" v-if="$gate.isAdmin()">
-            <div class="col-md-12">        
+            <div class="col-md-12"> 
+                <div class="card-tools">                            
+                    <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
+                        Añadir Usuario
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
+                </div>        
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Usuarios</h3>      
-
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
-                                Añadir Usuario
-                                <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="buscar"
+                                single-line
+                                hide-details
+                            ></v-text-field>                            
                         </div>              
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>                                    
-                                    <th>CI</th>
-                                    <th>Telefono</th>
-                                    <th>Direccion</th>
-                                    <th>Tipo</th>
-                                    <th>Correo</th>                                                                        
-                                    <th>Editar</th>
-                                    <!--<th>Bio</th>                                    
-                                    <th>Editar</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="user in users.data" :key="user.id">
-                                    <td>{{user.id}}</td>
-                                    <td>{{user.name}}</td>
-                                    <td>{{user.ci}}</td>
-                                    <td>{{user.telefono}}</td>
-                                    <td>{{user.direccion}}</td>
-                                    <td>{{user.tipo}}</td>
-                                    <td>{{user.email}}</td>
-                                    <!--<td>{{user.bio}}</td>-->                                
-
-                                    <td class="justify-items-center">
-                                        <a href="#">
-                                            <i class="fa fa-edit" @click="editModal(user)"></i>
-                                        </a>
-                                        /
-                                        <a href="#" @click="deleteUser(user.id)">
-                                            <i class="fa fa-trash red"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                                                 
-                            </tbody>
-                        </table>
-                    </div>
+                    <v-card>                        
+                        <v-data-table
+                            :headers="headers"
+                            :items="users"
+                            :search="search"
+                        >   
+                            <template v-slot:item.foto="{ item }">
+                                <div class="p-2">
+                                    <v-img :src="'img/profile/'+item.foto" :alt="item.foto" width="50px" height="50px"></v-img>
+                                </div>
+                            </template>
+                            <template v-slot:item.accion="{ item }">
+                                <a href="#">
+                                    <i class="fa fa-edit" @click="editModal(item)"></i>
+                                </a>
+                                /
+                                <a href="#" @click="deleteUser(item.id)">
+                                    <i class="fa fa-trash red"></i>
+                                </a>
+                            </template>
+                        </v-data-table>
+                    </v-card>
                     
                 </div>
                 <!-- /.card -->
@@ -144,8 +134,7 @@
         },
         data() {
             return {                
-                editmode: false,
-                users : {},
+                editmode: false,                
                 form: new Form({
                     id : '',
                     name : '',                    
@@ -156,12 +145,27 @@
                     tipo : '',
                     email : '',
                     password : '',
-                })
+                }),
+                search: '',
+                headers: [
+                    {
+                        text: 'Nombre',
+                        align: 'start',
+                        sortable: false,
+                        value: 'name',
+                    },                    
+                    { text: 'Apellido', value: 'apellido' },
+                    { text: 'CI', value: 'ci' },
+                    { text: 'Telefono', value: 'telefono' },
+                    { text: 'Dirección', value: 'direccion' },
+                    { text: 'Foto', value: 'foto' },       
+                    { text: 'Tipo', value: 'tipo' },   
+                    { text: 'Correo', value: 'email' },          
+                    { text: 'Acciones', value: 'accion' },
+                ],
+                users: [],
             }
-        },
-        mounted() {
-            console.log(this.form)
-        },
+        },        
         methods: { 
             updateUser(){
                 this.$Progress.start();
@@ -219,7 +223,7 @@
             },                                                              
             loadUsers(){                
                 if(this.$gate.isAdmin()){
-                    axios.get("api/user").then(({ data }) => (this.users = data));
+                    axios.get("api/user").then(response => (this.users = response.data));                
                 }
             },            
             createUser(){

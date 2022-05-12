@@ -19,6 +19,8 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$brown: #b08539;
+$mixto: linear-gradient(40deg,rgb(160, 5, 134), rgb(248, 86, 207));
 
 .blue{
     color: $blue;
@@ -52,4 +54,11 @@ $cyan: #6cb2eb;
 }
 .cyan{
     color: $cyan;
+}
+.brown{
+    color: $brown;
+}
+
+.mixto{
+    color: $mixto;
 }

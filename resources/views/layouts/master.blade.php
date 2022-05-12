@@ -1,3 +1,8 @@
+@php
+    $colores = DB::table('colores')
+    ->first();
+@endphp
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -5,20 +10,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/detalles/'.$detalles->logo_institucion) }}">
     <title>APES</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--Styles-->
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/contenido.css')}}"> 
+    <link rel="stylesheet" href="{{asset('css/master.css')}}"> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet"> 
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="app">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <nav class="main-header navbar navbar-expand navbar-light border-bottom" style="{{ $colores->color }}">
 
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -40,10 +52,10 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="./img/logo.png" alt="APES Logo" class="brand-image img-circle elevation-3"
+            <a href="/home" class="brand-link">
+                <img src="{{ asset('img/detalles/'.$detalles->logo_institucion) }}" alt="Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">APES</span>
+                <span class="brand-text font-weight-light">{{ $detalles->nombre_institucion }}</span>
             </a>
 
             <div class="sidebar">
@@ -70,57 +82,134 @@
                             </router-link>
                         </li>
                         @can('isAdmin')
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-cog green"></i>
-                                <p>
-                                    Administración
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview adminlink ml-4">
-                                <li class="nav-item">
-                                    <router-link to="/users" class="nav-link">
-                                        <i class="fas fa-users nav-icon"></i>
-                                        <p>Usuarios</p>
-                                    </router-link>
-                                </li>
-                                <li class="nav-item">
-                                    <router-link to="/developer" class="nav-link">
-                                        <i class="nav-icon fas fa-cogs purple"></i>
-                                        <p>
-                                            Desarrolladores                                    
-                                        </p>
-                                    </router-link>
-                                </li>
-                                <li class="nav-item">
-                                    <router-link to="/categorias" class="nav-link">
-                                        <i class="nav-icon fas fa-list-alt teal"></i>
-                                        <p>
-                                            Categorias                                    
-                                        </p>
-                                    </router-link>
-                                </li>                                
-                            </ul>
-                        </li>                                                                                                
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-cog green"></i>
+                                    <p>
+                                        Administración
+                                        <i class="right fa fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview adminlink ml-4">
+                                    <li class="nav-item">
+                                        <router-link to="/usuarios" class="nav-link">
+                                            <i class="fas fa-users nav-icon"></i>
+                                            <p>Usuarios</p>
+                                        </router-link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <router-link to="/desarrollador" class="nav-link">
+                                            <i class="nav-icon fas fa-cogs purple"></i>
+                                            <p>
+                                                Desarrolladores                                    
+                                            </p>
+                                        </router-link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <router-link to="/crearFacultad" class="nav-link">
+                                            <i class="nav-icon fas fa-home pink"></i>
+                                            <p>
+                                                Facultades                                    
+                                            </p>
+                                        </router-link>
+                                    </li> 
+                                    <li class="nav-item">                                
+                                        <router-link to="/crearCarrera" class="nav-link">
+                                            <i class="nav-icon fa-solid fa-school cyan"></i>
+                                            <p>
+                                                Carreras                                    
+                                            </p>
+                                        </router-link>
+                                    </li>    
+                                    <li class="nav-item">
+                                        <router-link to="/crearCategoria" class="nav-link">
+                                            <i class="nav-icon fas fa-list-alt teal"></i>
+                                            <p>
+                                                Categorias                                    
+                                            </p>
+                                        </router-link>
+                                    </li>      
+                                    <li class="nav-item">
+                                        <router-link to="/crearSeccion" class="nav-link">
+                                            <i class="nav-icon fas fa-clipboard-list brown"></i>
+                                            <p>                                            
+                                                Secciones                                    
+                                            </p>
+                                        </router-link>
+                                    </li>   
+                                    <li class="nav-item">
+                                        <router-link to="/crearInformacion" class="nav-link">
+                                            <i class="nav-icon fa-solid fa-circle-info yellow"></i>
+                                            <p>                                            
+                                                Informaciones                                    
+                                            </p>
+                                        </router-link>
+                                    </li>                                                                                                  
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa-solid fa-pen-to-square nav-icon"></i>
+                                    <p>
+                                        Personalización
+                                        <i class="right fa fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview adminlink ml-4">
+                                    <li class="nav-item">
+                                        <router-link to="/carrusel" class="nav-link">
+                                            <i class="fa-solid fa-images nav-icon"></i>
+                                            <p>Carrusel de Imagenes</p>
+                                        </router-link>
+                                    </li>                                                                                                                                   
+                                    <li class="nav-item">
+                                        <router-link to="/detalles" class="nav-link">
+                                            <i class="fa-solid fa-a nav-icon"></i>
+                                            <p>Detalles</p>
+                                        </router-link>
+                                    </li>  
+                                    <li class="nav-item">
+                                        <router-link to="/colores" class="nav-link">
+                                            <i class="fa-solid fa-palette nav-icon mixto"></i>
+                                            <p>Colores</p>
+                                        </router-link>
+                                    </li>                         
+                                </ul>
+                            </li>                                                                                                
                         @endcan
                         <li class="nav-item">
-                            <router-link to="/profile" class="nav-link">
+                            <router-link to="/perfil" class="nav-link">
                                 <i class="nav-icon fas fa-user orange"></i>
                                 <p>
-                                    Profile                                    
+                                    Perfil                                    
                                 </p>
                             </router-link>
                         </li> 
 
                         <li class="nav-item">
-                            <router-link to="/cursos-complementarios" class="nav-link">
-                                <i class="nav-icon fas fa-user-graduate pink"></i>
+                            <router-link to="/facultades" class="nav-link">
+                                <i class="nav-icon fas fa-home pink"></i>
                                 <p>
-                                    Cursos Complementarios                                    
+                                    Facultades                                    
                                 </p>
                             </router-link>
-                        </li>                        
+                        </li>                                              
+                        <li class="nav-item">
+                            <router-link to="/informaciones" class="nav-link">
+                                <i class="nav-icon fa-solid fa-circle-info yellow"></i>
+                                <p>
+                                    Información                                  
+                                </p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/foros" class="nav-link">
+                                <i class="nav-icon fa-solid fa-circle-info red"></i>
+                                <p>
+                                    Foros                                  
+                                </p>
+                            </router-link>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
@@ -141,13 +230,14 @@
             </div>
         </aside>
 
-        <div class="content-wrapper">
-            
+        <div class="content-wrapper">            
             <!--MAIN CONTENT-->
             <div class="content">
                 <div class="container-fluid">
                     <vue-progress-bar> </vue-progress-bar>
-                    <router-view></router-view>
+                    <v-app>
+                        <router-view></router-view>
+                    </v-app>                    
                 </div>
             </div>
         </div>
@@ -162,9 +252,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-inline">
-                APES
+                {{ $detalles->nombre_institucion }}
             </div>
-            <strong>Copyright &copy; 2022 <a href="https://github.com/Boxter24/CodeTeka">APES.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2022 <a href="https://github.com/Boxter24/CodeTeka">{{ $detalles->nombre_institucion }}.com</a>.</strong> All rights reserved.
         </footer>
     </div>
 
