@@ -40,14 +40,14 @@
             </ul>
 
             <!-- SEARCH FORM -->
-            <div class="input-group input-group-sm">
+            <!--<div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-navbar">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
-            </div>
+            </div>-->
         </nav>
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -74,7 +74,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <router-link to="/dashboard" class="nav-link">
+                            <router-link to="/home" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt blue"></i>
                                 <p>
                                     Inicio                                    
@@ -204,7 +204,7 @@
                         </li>
                         <li class="nav-item">
                             <router-link to="/foros" class="nav-link">
-                                <i class="nav-icon fa-solid fa-circle-info red"></i>
+                                <i class="nav-icon fa-solid fa-message blue"></i>
                                 <p>
                                     Foros                                  
                                 </p>
@@ -235,7 +235,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <vue-progress-bar> </vue-progress-bar>
-                    <v-app>
+                    <v-app style="padding: 10px">
                         <router-view></router-view>
                     </v-app>                    
                 </div>

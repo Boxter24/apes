@@ -1,58 +1,49 @@
 <template>
     <v-app class="container">
         <div class="row mt-5">
-            <div class="col-md-12">        
+            <div class="col-md-12"> 
+                <div class="card-tools">                            
+                    <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
+                        Añadir Sección
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
+                </div>        
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Secciones</h3>      
-
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
-                                Añadir Seccion
-                                <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="buscar"
+                                single-line
+                                hide-details
+                            ></v-text-field>                            
                         </div>              
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>                                    
-                                    <th>Descripcion</th>                                      
-                                    <th>Carrera</th>  
-                                    <th>Categoria</th>  
-                                    <th>Foto</th>  
-                                    <th>Acciones</th>                                    
-                                    <!--<th>Bio</th>                                    
-                                    <th>Editar</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(seccion,i) in secciones" :key="i">
-                                    <td>{{i+1}}</td>
-                                    <td>{{seccion.nombre_seccion}}</td>
-                                    <td>{{seccion.descripcion_seccion}}</td>
-                                    <td>{{seccion.nombre_carrera}}</td>   
-                                    <td>{{seccion.nombre_categoria}}</td>   
-                                    <td><img :src="'img/secciones/'+seccion.foto" class="img-responsive" height="50" width="50"></td>                                 
-                                    <!--<td>{{user.bio}}</td>-->                                
-
-                                    <td class="justify-items-center">
-                                        <a href="#">
-                                            <i class="fa fa-edit" @click="editModal(seccion)"></i>
-                                        </a>
-                                        /
-                                        <a href="#">
-                                            <i class="fa fa-trash" style="color: red" @click="deleteSeccion(seccion.id)"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                                                 
-                            </tbody>
-                        </table>
-                    </div>
-                    
+                    <v-card>                        
+                        <v-data-table
+                            :headers="headers"
+                            :items="secciones"
+                            :search="search"
+                        >   
+                            <template v-slot:item.foto="{ item }">
+                                <div class="p-2">
+                                    <v-img :src="'img/secciones/'+item.foto" :alt="item.foto" width="50px" height="50px"></v-img>
+                                </div>
+                            </template>
+                            <template v-slot:item.accion="{ item }">
+                                <a href="#">
+                                    <i class="fa fa-edit" @click="editModal(item)"></i>
+                                </a>
+                                /
+                                <a href="#" @click="deleteSeccion(item.id)">
+                                    <i class="fa fa-trash red"></i>
+                                </a>
+                            </template>
+                        </v-data-table>
+                    </v-card>                    
                 </div>
                 <!-- /.card -->
             </div>
@@ -104,8 +95,11 @@
                                     id="select_carrera" 
                                     :items="carreras"
                                     label="Carrera a la que Pertenece"                                    
-                                    prepend-icon="fa-solid fa-home">
+                                    prepend-icon="fa-solid fa-home"
+                                    name="id_carrera"
+                                    :class="{ 'is-invalid': form.errors.has('id_carrera') }">
                                 </v-select>
+                                <has-error :form="form" field="id_carrera"></has-error>
                             </div>
 
                             <div class="form-group">                                
@@ -116,8 +110,11 @@
                                     id="select_categoria" 
                                     :items="categorias"
                                     label="Categoria a la que Pertenece"                                    
-                                    prepend-icon="fa-solid fa-home">
+                                    prepend-icon="fa-solid fa-home"
+                                    name="id_categoria"
+                                    :class="{ 'is-invalid': form.errors.has('id_categoria') }">
                                 </v-select>
+                                <has-error :form="form" field="id_categoria"></has-error>
                             </div>
 
                             <div class="form-group">                                
@@ -128,9 +125,11 @@
                                     counter
                                     label="Foto" 
                                     @change="fotoSeccion" 
-                                    name="photo" 
-                                    prepend-icon="mdi-camera">
-                                </v-file-input>                                    
+                                    name="foto" 
+                                    prepend-icon="mdi-camera"
+                                    :class="{ 'is-invalid': form.errors.has('foto') }">
+                                </v-file-input>    
+                                <has-error :form="form" field="foto"></has-error>                                
                             </div>
 
                         </div>
@@ -150,8 +149,7 @@
     export default {          
         data() {
             return {                
-                editmode: false,
-                secciones : [],
+                editmode: false,                
                 carreras : [],
                 categorias : [],
                 foto: [],
@@ -162,7 +160,22 @@
                     id_carrera : '',
                     id_categoria : '',                     
                     foto : '',                                     
-                })
+                }),
+                search: '',
+                headers: [
+                    {
+                        text: 'Nombre',
+                        align: 'start',
+                        sortable: false,
+                        value: 'nombre_seccion',
+                    },                    
+                    { text: 'Descripción', value: 'descripcion_seccion' },                    
+                    { text: 'Carrera', value: 'nombre_carrera' },                    
+                    { text: 'Categoria', value: 'nombre_categoria' },                    
+                    { text: 'Foto', value: 'foto' },                              
+                    { text: 'Acciones', value: 'accion' },
+                ],
+                secciones : [],
             }
         },
         mounted() {

@@ -22,16 +22,18 @@
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet"> 
         <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"> 
         <script src="{{ asset('js/app.js') }}" defer></script> 
+        <script src="https://cdn.tailwindcss.com"></script>
         
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         
-        <!-- Styles -->
+        <!-- Styles -->        
         <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">                
         <link href="{{ asset('css/inicio.css') }}" rel="stylesheet">  
         <link href="{{ asset('css/redes_sociales.css') }}" rel="stylesheet">       
         <link href="{{ asset('css/contenido.css') }}" rel="stylesheet"> 
-        <link href="{{ asset('css/footer.css') }}" rel="stylesheet">                 
+        <link href="{{ asset('css/footer.css') }}" rel="stylesheet">               
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 
         <!-- Iconos -->
         <script src="https://kit.fontawesome.com/72ffbb4e9b.js" crossorigin="anonymous"></script>
@@ -58,7 +60,7 @@
 
                                             <li><a href="{{ url('/informaciones') }}">Informacion</a></li>
 
-                                            <!--<li><vista-informacion></vista-informacion></li>-->
+                                            <li><a href="{{ url('/foros') }}">Foros</a></li>
                                              
                                             <li><a style="hover: rgb(65, 3, 15)" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
@@ -92,8 +94,11 @@
                     <div class="content-wrapper main">            
                         <!--MAIN CONTENT-->
                         <div class="content">
-                            <div class="container-fluid">                                
-                                <router-view></router-view>
+                            <div class="container-fluid">
+                                <vue-progress-bar> </vue-progress-bar>   
+                                <v-app class="mt-4">                             
+                                    <router-view></router-view>
+                                </v-app>
                             </div>
                         </div>
                     </div>
@@ -107,8 +112,8 @@
                                     <div class="single-cta">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <div class="cta-text">
-                                            <h4>Find us</h4>
-                                            <span>1010 Avenue, sw 54321, chandigarh</span>
+                                            <h4>Encuéntranos</h4>
+                                            <span>{{ $detalles->direccion_institucion }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -116,8 +121,8 @@
                                     <div class="single-cta">
                                         <i class="fas fa-phone"></i>
                                         <div class="cta-text">
-                                            <h4>Call us</h4>
-                                            <span>9876543210 0</span>
+                                            <h4>LLámanos</h4>
+                                            <span>{{ $detalles->telefono_institucion }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -125,8 +130,8 @@
                                     <div class="single-cta">
                                         <i class="far fa-envelope-open"></i>
                                         <div class="cta-text">
-                                            <h4>Mail us</h4>
-                                            <span>mail@info.com</span>
+                                            <h4>Correo Electrónico</h4>
+                                            <span>{{ $detalles->correo_institucion }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -137,14 +142,13 @@
                                 <div class="col-xl-4 col-lg-4 mb-50">
                                     <div class="footer-widget">
                                         <div class="footer-logo mt-2">
-                                            <a href="index.html"><img src="https://i.ibb.co/QDy827D/ak-logo.png" class="img-fluid" alt="logo"></a>
+                                            <a href="/"><img src="{{ asset('img/detalles/'.$detalles->logo_institucion) }}" class="img-circle elevation-4" alt="logo"></a>
                                         </div>
                                         <div class="footer-text">
-                                            <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
-                                            elit,Lorem ipsum dolor sit amet.</p>
+                                            <p>{{ $detalles->descripcion_institucion }}</p>
                                         </div>
                                         <div class="footer-social-icon">
-                                            <span>Follow us</span>
+                                            <span>Siguenos</span>
                                             <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
                                             <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
                                             <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
@@ -154,7 +158,7 @@
                                 <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
                                     <div class="footer-widget">
                                         <div class="footer-widget-heading">
-                                            <h3>Useful Links</h3>
+                                            <h3>Servicios</h3>
                                         </div>
                                         <ul>
                                             <li><a href="#">Home</a></li>
@@ -173,10 +177,10 @@
                                 <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
                                     <div class="footer-widget">
                                         <div class="footer-widget-heading">
-                                            <h3>Subscribe</h3>
+                                            <h3>Subscríbete</h3>
                                         </div>
                                         <div class="footer-text mb-25">
-                                            <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                                            <p>Envíanos un correo si tienes alguna duda o iquietud.</p>
                                         </div>
                                         <div class="subscribe-form">
                                             <form action="#">
@@ -194,17 +198,17 @@
                             <div class="row">
                                 <div class="text-center text-lg-left">
                                     <div class="copyright-text">
-                                        <p>Copyright &copy; 2018, All Right Reserved</p>
+                                        <p>Copyright &copy; 2022, All Right Reserved</p>
                                     </div>
                                 </div>
                                 <div class="text-center text-lg-right">
                                     <div class="footer-menu">
                                         <ul>
                                             <li><a href="#">Home</a></li>
-                                            <li class="margin-ul"><a href="#">Terms</a></li>
-                                            <li class="margin-ul"><a href="#">Privacy</a></li>
-                                            <li class="margin-ul"><a href="#">Policy</a></li>
-                                            <li class="margin-ul"><a href="#">Contact</a></li>
+                                            <li class="margin-ul"><a href="#">Términos</a></li>
+                                            <li class="margin-ul"><a href="#">Privacidad</a></li>
+                                            <li class="margin-ul"><a href="#">Política</a></li>
+                                            <li class="margin-ul"><a href="#">Contacto</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -238,12 +242,7 @@
             </ul>
         </div>-->    
         <!-- Script -->
-        <script src="{{ asset('js/welcome.js') }}" defer></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>                                       
-        <script type="text/javascript">                        
-            $(window).on('load', function(){
-                $(".loader").fadeOut("slow");
-            });
-        </script>       
+        <script src="{{ asset('js/welcome.js') }}" defer></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>                                                     
     </body>
 </html>

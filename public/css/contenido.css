@@ -53,3 +53,26 @@
     justify-content: end;
     margin-bottom: 1em;
 }
+
+.card-foro{
+    margin-top: 40px;
+}
+
+.comentar-foro{
+    margin: 0;
+    margin-bottom: 15px!important;
+}
+
+.contenedor-boton-comentar{
+    margin: 0!important;
+}
+
+a.linkComentarios{
+    text-decoration: none;
+}
+
+.comentario-foro{
+    margin-left: auto!important;
+    margin-right: auto!important;
+    margin-top: 2em!important;
+}

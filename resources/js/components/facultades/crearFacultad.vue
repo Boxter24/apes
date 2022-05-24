@@ -1,54 +1,49 @@
 <template>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-12">        
+            <div class="col-md-12"> 
+                <div class="card-tools">                            
+                    <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
+                        Añadir Facultad
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
+                </div>        
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Facultades</h3>      
-
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
-                                Añadir Facultad
-                                <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="buscar"
+                                single-line
+                                hide-details
+                            ></v-text-field>                            
                         </div>              
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>                                    
-                                    <th>Descripcion</th>
-                                    <th>Foto</th>  
-                                    <th>Acciones</th>                                    
-                                    <!--<th>Bio</th>                                    
-                                    <th>Editar</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(facultad,id) in facultades" :key="id">
-                                    <td>{{id+1}}</td>
-                                    <td>{{facultad.nombre_facultad}}</td>
-                                    <td>{{facultad.descripcion_facultad}}</td>                                    
-                                    <td><img :src="'img/facultades/'+facultad.foto" class="img-responsive" height="50" width="50"></td>                                    
-                                    <!--<td>{{user.bio}}</td>-->                                
-
-                                    <td class="justify-items-center">
-                                        <a href="#">
-                                            <i class="fa fa-edit" @click="editModal(facultad)"></i>
-                                        </a>
-                                        /
-                                        <a href="#" @click="deleteFacultad(facultad.id)">
-                                            <i class="fa fa-trash" style="color: red"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                                                 
-                            </tbody>
-                        </table>
-                    </div>
-                    
+                    <v-card>                        
+                        <v-data-table
+                            :headers="headers"
+                            :items="facultades"
+                            :search="search"
+                        >   
+                            <template v-slot:item.foto="{ item }">
+                                <div class="p-2">
+                                    <v-img :src="'img/facultades/'+item.foto" :alt="item.foto" width="50px" height="50px"></v-img>
+                                </div>
+                            </template>
+                            <template v-slot:item.accion="{ item }">
+                                <a href="#">
+                                    <i class="fa fa-edit" @click="editModal(item)"></i>
+                                </a>
+                                /
+                                <a href="#" @click="deleteFacultad(item.id)">
+                                    <i class="fa fa-trash red"></i>
+                                </a>
+                            </template>
+                        </v-data-table>
+                    </v-card>                    
                 </div>
                 <!-- /.card -->
             </div>
@@ -82,7 +77,7 @@
 
                             <div class="form-group">
                                 <v-textarea 
-                                    label="Descripción"
+                                    label="Palabra Clave"
                                     v-model="form.descripcion_facultad" 
                                     name="descripcion_facultad" 
                                     id="descripcion_facultad"                                    
@@ -101,9 +96,11 @@
                                     counter
                                     label="Foto" 
                                     @change="fotoFacultad" 
-                                    name="photo"                                     
-                                    prepend-icon="mdi-camera">
-                                </v-file-input>                                 
+                                    name="foto"                                     
+                                    prepend-icon="mdi-camera"
+                                    :class="{ 'is-invalid': form.errors.has('foto') }">
+                                </v-file-input>   
+                                <has-error :form="form" field="foto"></has-error>                              
                             </div>  
 
                         </div>
@@ -123,16 +120,29 @@
     export default {          
         data() {
             return {                
-                editmode: false,
-                facultades : [],
+                editmode: false,                
                 foto: [],
                 form: new Form({
                     id : '',
                     nombre_facultad : '',                    
                     descripcion_facultad : '', 
                     foto : '',                              
-                }),                
-            }
+                }),
+                search: '',
+                headers: [
+                    {
+                        text: 'Nombre',
+                        align: 'start',
+                        sortable: false,
+                        value: 'nombre_facultad',
+                    },                    
+                    { text: 'Descripción', value: 'descripcion_facultad' },
+                    { text: 'Foto', value: 'foto' },                              
+                    { text: 'Acciones', value: 'accion' },
+                ],
+                facultades : [],
+            }                
+            
         },
         mounted() {
             console.log(this.form)

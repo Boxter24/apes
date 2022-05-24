@@ -67,7 +67,10 @@ let routes = [
     { path: '/perfil', component: require('./components/users/Profile.vue').default },
 
     //VISTAS ADMIN
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },        
+    { path: '/home', component: require('./components/Dashboard.vue').default },        
+    { path: '/usuariosHoy', component: require('./components/inicio/Usuarios_del_Dia.vue').default },        
+    { path: '/forosHoy', component: require('./components/inicio/Foros_del_Dia.vue').default },        
+    { path: '/comentariosHoy', component: require('./components/inicio/Comentarios_del_Dia.vue').default },        
 
     //ADMINISTRACION
     { path: '/usuarios', component: require('./components/users/Users.vue').default },    
@@ -89,6 +92,7 @@ let routes = [
     { path: '/informaciones', component: require('./components/informaciones/Informaciones.vue').default },
 
     { path: '/foros', component: require('./components/foros/Foros.vue').default },
+    { path: '/comentarios', component: require('./components/foros/ComentariosForo.vue').default },
     
     //PERSONALIZACION
     { path: '/carrusel', component: require('./components/personalizacion/Carrusel.vue').default },

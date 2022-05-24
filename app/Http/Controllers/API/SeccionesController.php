@@ -43,7 +43,15 @@ class SeccionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $this->validate($request,[
+            'nombre_seccion' => 'required|string|max:20',
+            'descripcion_seccion' => 'required|string|max:150',
+            'id_carrera' => 'required',
+            'id_categoria' => 'required',
+            'foto' => 'required',            
+        ]);
+
         $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
 
         \Image::make($request->foto)->save(public_path('img/secciones/').$name);
@@ -95,6 +103,14 @@ class SeccionesController extends Controller
      */
     public function update(Request $request, Secciones $seccione)
     {   
+        $this->validate($request,[
+            'nombre_seccion' => 'required|string|max:20',
+            'descripcion_seccion' => 'required|string|max:150',
+            'id_carrera' => 'required',
+            'id_categoria' => 'required',
+            'foto' => 'required',            
+        ]);
+
         //Verificar si la foto esta en base64
         if(strlen($request->foto)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];

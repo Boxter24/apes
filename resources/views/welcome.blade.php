@@ -52,8 +52,12 @@
                                 <div id="mainListDiv" class="main_list">                            
                                     <ul class="navlinks">
                                         @auth
-                                            <li><a href="{{ url('/home') }}">Home</a></li>
-                                            
+                                            @if(Auth::user()->tipo == "admin")
+                                                <li><a href="{{ url('/home') }}">Home</a></li>
+                                            @else
+                                                <li><a href="{{ url('/inicio') }}">Home</a></li>
+                                            @endif                                            
+
                                             <li><option-navbar></option-navbar></li>
                                              
                                             <li><a style="hover: rgb(65, 3, 15)" href="{{ route('logout') }}"

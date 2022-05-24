@@ -344,6 +344,7 @@
     padding: 0;
     background-color: #151414;
     height: 6em;
+    z-index: 9999;
 }
 
 

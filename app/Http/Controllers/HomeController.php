@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -23,10 +24,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
         $detalles = DB::table('detalles')
         ->first();
-        //dd($footer);
-        return view('home',compact('detalles'));
+
+        if(Auth::user()->tipo == "admin"){
+            return view('home',compact('detalles'));
+        }
+        else{
+            return view('layouts.inicio',compact('detalles'));
+        }                        
     }
 }

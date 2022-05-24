@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\model\Foros;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,13 @@ class ForosController extends Controller
 {
     public function index()
     {                 
-        return Foros::all();
+        $foros = DB::table('foros')
+        ->where('estado','=','activo')
+        ->leftJoin('users','foros.id_usuario','=','users.id')
+        ->select('foros.id','nombre_foro','comentario_foro','fecha_publicacion','users.name')
+        ->get();
+
+        return $foros;
     }
 
     /**
@@ -34,6 +41,11 @@ class ForosController extends Controller
      */
     public function store(Request $request)
     {               
+        $this->validate($request,[
+            'nombre_foro' => 'required|string|max:20',
+            'comentario_foro' => 'required|string|max:30',                       
+        ]);
+
         $id = Auth::id();
         $request->merge(['id_usuario' => $id]); 
         $foro = Foros::create($request->post());
@@ -49,12 +61,27 @@ class ForosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($usuario)
-    {
-        $foros = DB::table('foros')
-        ->where('id_usuario','=',$usuario)
-        ->get();
-
+    public function show($data)
+    {       
+        $date = Carbon::now()->format('Y-m-d'); 
+        //dd($date);
+        if($data == "forosDelDia"){
+            $foros = DB::table('foros')
+            ->where('fecha_publicacion','=',$date)            
+            ->count();
+        }   
+        elseif($data == "hoy"){
+            $foros = DB::table('foros')            
+            ->where('estado','=','inactivo')            
+            ->get();
+        }   
+        else{
+            $foros = DB::table('foros')
+            ->where('id','=',$data)
+            ->select('comentario_foro')
+            ->first();
+        }         
+        
         return response()->json($foros);
     }
 
@@ -78,6 +105,11 @@ class ForosController extends Controller
      */
     public function update(Request $request, Foros $foro)
     {           
+        $this->validate($request,[
+            'nombre_foro' => 'required|string|max:20',
+            'comentario_foro' => 'required|string|max:30',                       
+        ]);
+          
         $foro->update($request->all());
 
         return ['message' => "Success"];

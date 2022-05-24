@@ -16,7 +16,7 @@ class CreateCarrerasTable extends Migration
         Schema::create('carreras', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_carrera');
-            $table->string('descripcion_carrera')->nullable();
+            $table->string('descripcion_carrera');
             $table->string('foto')->default('carrera.png');    
             $table->unsignedInteger('id_facultad');
 

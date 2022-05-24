@@ -39,6 +39,12 @@ class CarrerasController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nombre_carrera' => 'required|string|max:11',
+            'descripcion_carrera' => 'required|string|max:11',                                                                                                                                          
+            'foto' => 'required',
+        ]);
+
         $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
 
         \Image::make($request->foto)->save(public_path('img/carreras/').$name);
@@ -86,6 +92,11 @@ class CarrerasController extends Controller
      */
     public function update(Request $request, Carreras $carrera)
     {   
+        $this->validate($request,[
+            'nombre_carrera' => 'required|string|max:11',
+            'descripcion_carrera' => 'required|string|max:11',                                                                                                                                                      
+        ]);
+
         //Verificar si la foto esta en base64
         if(strlen($request->foto)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];

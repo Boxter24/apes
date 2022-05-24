@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -35,21 +37,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {   
+        $date = Carbon::now()->format('Y-m-d'); 
 
         $this->validate($request,[
             'name' => 'required|string|max:20',
+            'apellido' => 'required|string|max:20',
+            'telefono' => 'required|string|max:11',
+            'direccion' => 'required|string|max:30',
+            'ci' => 'required|string|max:8',
+            'tipo' => 'required|string|',
             'email' => 'required|string|email|max:191|unique:users',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6',        
+            'foto' => 'required'            
         ]);
 
+       
+        
+            $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
+
+            \Image::make($request->foto)->save(public_path('img/profile/').$name);
+            $request->merge(['foto' => $name]);
+            
+        
         return User::create([
             "name" => $request["name"],
-            "telefono" => $request["ci"],            
+            "apellido" => $request["apellido"],
+            "telefono" => $request["telefono"],            
             "direccion" => $request["direccion"],
+            "ci" => $request["ci"],            
             "tipo" => $request["tipo"],
             "foto" => $request["foto"],
             "email" => $request["email"],
-            'password' => Hash::make($request['password']),            
+            'password' => Hash::make($request['password']),    
+            "fecha" => $date,        
         ]);
     }
 
@@ -99,9 +119,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($data)
+    {           
+        $date = Carbon::now()->format('Y-m-d');        
+        //dd($data);
+        if($data == "hoy"){
+            $user = DB::table('users')
+            ->where('fecha','=',$date)
+            ->get();
+        }
+        else{
+            $user = DB::table('users')
+            ->where('fecha','=',$date)
+            ->count();
+        }        
+        
+        return response()->json($user);
     }
 
     public function profile()
@@ -125,13 +158,40 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:6'
+            'name' => 'required|string|max:20',
+            'apellido' => 'required|string|max:20',
+            'telefono' => 'required|string|max:11',
+            'direccion' => 'required|string|max:30',
+            'ci' => 'required|string|max:8',
+            'tipo' => 'required|string|',
+            'email' => 'required|string|email|max:191|unique:users',
+            'password' => 'required|string|min:6'            
         ]);
 
+        $currentPhoto = $user->foto;
+
+
+        if($request->foto != $currentPhoto){
+            $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
+
+            \Image::make($request->foto)->save(public_path('img/profile/').$name);
+            $request->merge(['foto' => $name]);
+
+            $userPhoto = public_path('img/profile/').$currentPhoto;
+            if(file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
+
+        }
+
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+
+
         $user->update($request->all());
-        return ['message' => 'Updated the user info'];
+        return ['message' => "Success"];
     }
 
     /**

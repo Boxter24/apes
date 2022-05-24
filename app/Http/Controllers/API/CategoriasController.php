@@ -39,6 +39,12 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nombre_categoria' => 'required|string|max:12',
+            'descripcion_categoria' => 'required|string|max:11',                                          
+            'foto' => 'required',                       
+        ]);
+
         $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
 
         \Image::make($request->foto)->save(public_path('img/categorias/').$name);
@@ -82,6 +88,11 @@ class CategoriasController extends Controller
      */
     public function update(Request $request, Categorias $categoria)
     {   
+        $this->validate($request,[
+            'nombre_categoria' => 'required|string|max:12',
+            'descripcion_categoria' => 'required|string|max:11',                                                                            
+        ]);
+
         //Verificar si la foto esta en base64
         if(strlen($request->foto)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];

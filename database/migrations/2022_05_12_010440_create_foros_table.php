@@ -18,6 +18,8 @@ class CreateForosTable extends Migration
             $table->string('nombre_foro');
             $table->longText('comentario_foro');
             $table->unsignedInteger('id_usuario');
+            $table->timestamp('fecha_publicacion')->nullable();
+            $table->string('estado')->default('inactivo');
 
             $table->foreign('id_usuario')
                   ->references('id')->on('users')

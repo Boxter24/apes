@@ -63,56 +63,116 @@
                     </div>
                     <form @submit.prevent="editmode ? updateUser() : createUser()">
                         <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="form.name" type="text" name="name"
-                                    placeholder="Name"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="Nombre" 
+                                    v-model="form.name" 
+                                    type="text" 
+                                    name="name"    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('name') }">
+                                </v-text-field>
                                 <has-error :form="form" field="name"></has-error>
-                            </div>
+                            </div>    
 
-                            <div class="form-group">
-                                <input v-model="form.ci" type="number" name="ci"
-                                    placeholder="CI"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('ci') }">
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="apellido" 
+                                    v-model="form.apellido" 
+                                    type="text" 
+                                    name="Apellido"    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('apellido') }">
+                                </v-text-field>
+                                <has-error :form="form" field="apellido"></has-error>
+                            </div>                                                                                                                        
+
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="CI" 
+                                    v-model="form.ci" 
+                                    type="number" 
+                                    name="ci"    
+                                    prepend-icon="mdi-numeric"                               
+                                    :class="{ 'is-invalid': form.errors.has('ci') }">
+                                </v-text-field>
                                 <has-error :form="form" field="ci"></has-error>
-                            </div>
-
-                            <div class="form-group">
-                                <input v-model="form.telefono" type="number" name="telefono"
-                                    placeholder="Telefono"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('telefono') }">
-                                <has-error :form="form" field="ci"></has-error>
-                            </div>                                                                           
-
-                            <div class="form-group">
-                                <textarea v-model="form.direccion" name="direccion" id="direccion"
-                                placeholder="Direccion"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('direccion') }"></textarea>
-                                <has-error :form="form" field="direccion"></has-error>
                             </div>       
+                            
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="Teléfono" 
+                                    v-model="form.telefono" 
+                                    type="number" 
+                                    name="telefono"    
+                                    prepend-icon="mdi-numeric"                               
+                                    :class="{ 'is-invalid': form.errors.has('telefono') }">
+                                </v-text-field>
+                                <has-error :form="form" field="telefono"></has-error>
+                            </div> 
+                            
+                            <div class="form-group">                                
+                                <v-textarea 
+                                    label="Dirección"
+                                    v-model="form.direccion" 
+                                    name="direccion" 
+                                    id="direccion"
+                                    value="Ingrese una palabra clave"
+                                    prepend-icon="fa-solid fa-file-lines"
+                                    :class="{ 'is-invalid': form.errors.has('direccion') }">
+                                </v-textarea>
+                                <has-error :form="form" field="direccion"></has-error>
+                            </div>   
 
-                            <div class="form-group">
-                                <select name="type" v-model="form.tipo" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option value="">Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>                                    
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
-                            </div>                     
-                                                                                                                                                            
-                            <div class="form-group">
-                                <input v-model="form.email" type="email" name="email"
-                                    placeholder="Email"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="Email" 
+                                    v-model="form.email" 
+                                    type="email" 
+                                    name="email"    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('email') }">
+                                </v-text-field>
                                 <has-error :form="form" field="email"></has-error>
-                            </div>
+                            </div> 
 
-                            <div class="form-group">
-                                <input v-model="form.password" type="password" name="password" id="password"
-                                placeholder="Password"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                            <div class="form-group">                                
+                                <v-text-field 
+                                    label="Contraseña" 
+                                    v-model="form.password" 
+                                    type="password" 
+                                    name="password"    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('password') }">
+                                </v-text-field>
                                 <has-error :form="form" field="password"></has-error>
-                            </div>
+                            </div> 
+
+                            <div class="form-group">                                
+                                <v-file-input       
+                                    v-model="foto"  
+                                    accept="image/*"                              
+                                    show-size
+                                    counter
+                                    clearable
+                                    label="Foto" 
+                                    @change="fotoUsuario" 
+                                    name="photo" 
+                                    prepend-icon="mdi-camera">
+                                </v-file-input>                                    
+                            </div>                                                                                      
+
+                            <div class="form-group">                                
+                                <v-select
+                                    v-model="form.tipo"
+                                    :items="items"
+                                    name="tipo"  
+                                    label="Tipo de Usuario"
+                                    prepend-icon="mdi-account-switch" 
+                                    :class="{ 'is-invalid': form.errors.has('tipo') }"     
+                                ></v-select>        
+                                <has-error :form="form" field="tipo"></has-error>                           
+                            </div>                                                                                                                                                                                                                                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -164,6 +224,8 @@
                     { text: 'Acciones', value: 'accion' },
                 ],
                 users: [],
+                items: ['admin', 'user'],
+                foto: [], 
             }
         },        
         methods: { 
@@ -240,7 +302,34 @@
                 })
                 .catch(()=>{
                 })
-            }   
+            },   
+            fotoUsuario(e){      
+                //console.log(e);                      
+                let file = e;
+                if(file != null){
+                    let reader = new FileReader();  
+                    let size = file.size;              
+                    console.log(file);
+                    console.log(reader);
+                    let limit = 1024 * 1024 * 2;
+                    if(size > limit){
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'El archivo es muy pesado!',
+                        })
+                        return false;
+                    }
+                    reader.onloadend = (file) => {
+                        //console.log(reader.result);
+                        this.form.foto = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                }else{
+                    console.log("Se debe agregar una foto");
+                }
+                
+            },        
         },
         created() {
             this.loadUsers();

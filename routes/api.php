@@ -43,6 +43,8 @@ Route::resource('informaciones', API\InformacionesController::class);
 
 Route::resource('foros', API\ForosController::class)->middleware('auth:api');
 
+Route::resource('comentarios', API\ComentariosController::class)->middleware('auth:api');
+
 
 
 

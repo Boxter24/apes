@@ -1,57 +1,49 @@
 <template>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-12">        
+            <div class="col-md-12"> 
+                <div class="card-tools">                            
+                    <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
+                        Añadir Carrera
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
+                </div>        
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Carreras</h3>      
-
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
-                                Añadir Carrera
-                                <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="buscar"
+                                single-line
+                                hide-details
+                            ></v-text-field>                            
                         </div>              
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>                                    
-                                    <th>Descripcion</th>
-                                    <th>Facultad</th> 
-                                    <th>Foto</th> 
-                                    <th>Acciones</th>                                    
-                                    <!--<th>Bio</th>                                    
-                                    <th>Editar</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(carrera,id) in carreras" :key="id">
-                                    <td>{{id+1}}</td>
-                                    <td>{{carrera.nombre_carrera}}</td>
-                                    <td>{{carrera.descripcion_carrera}}</td>                                    
-                                    <td>{{carrera.nombre_facultad}}</td>
-                                    <td><img :src="'img/carreras/'+carrera.foto" class="img-responsive" height="50" width="50"></td>                                                                        
-                                    
-                                    <!--<td>{{user.bio}}</td>-->                                
-
-                                    <td class="justify-items-center">
-                                        <a href="#">
-                                            <i class="fa fa-edit" @click="editModal(carrera)"></i>
-                                        </a>
-                                        /
-                                        <a href="#" @click="deleteCarrera(carrera.id)">
-                                            <i class="fa fa-trash" style="color: red"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                                                 
-                            </tbody>
-                        </table>
-                    </div>
-                    
+                    <v-card>                        
+                        <v-data-table
+                            :headers="headers"
+                            :items="carreras"
+                            :search="search"
+                        >   
+                            <template v-slot:item.foto="{ item }">
+                                <div class="p-2">
+                                    <v-img :src="'img/carreras/'+item.foto" :alt="item.foto" width="50px" height="50px"></v-img>
+                                </div>
+                            </template>
+                            <template v-slot:item.accion="{ item }">
+                                <a href="#">
+                                    <i class="fa fa-edit" @click="editModal(item)"></i>
+                                </a>
+                                /
+                                <a href="#" @click="deleteCarrera(item.id)">
+                                    <i class="fa fa-trash red"></i>
+                                </a>
+                            </template>
+                        </v-data-table>
+                    </v-card>                    
                 </div>
                 <!-- /.card -->
             </div>
@@ -139,8 +131,7 @@
     export default {          
         data() {
             return {                
-                editmode: false,
-                carreras : [],
+                editmode: false,                
                 facultades : [],
                 foto: [],                           
                 form: new Form({
@@ -149,7 +140,21 @@
                     descripcion_carrera : '', 
                     id_facultad : '',  
                     foto : '',           
-                })
+                }),
+                search: '',
+                headers: [
+                    {
+                        text: 'Nombre',
+                        align: 'start',
+                        sortable: false,
+                        value: 'nombre_carrera',
+                    },                    
+                    { text: 'Descripción', value: 'descripcion_carrera' },
+                    { text: 'Facultad', value: 'nombre_facultad' },
+                    { text: 'Foto', value: 'foto' },                              
+                    { text: 'Acciones', value: 'accion' },
+                ],
+                carreras : [],
             }
         },
         mounted() {            

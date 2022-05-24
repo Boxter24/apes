@@ -1,54 +1,49 @@
 <template>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-12">        
+            <div class="col-md-12"> 
+                <div class="card-tools">                            
+                    <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
+                        Añadir Categoria
+                        <i class="fas fa-user-plus fa-fw"></i>
+                    </button>
+                </div>        
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">categorias</h3>      
-
+                        <h3 class="card-title">Categorias</h3>      
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal" data-toggle="modal" data-target="#addNew">
-                                Añadir categoria
-                                <i class="fas fa-user-plus fa-fw"></i>
-                            </button>
+                            <v-text-field
+                                v-model="search"
+                                append-icon="mdi-magnify"
+                                label="buscar"
+                                single-line
+                                hide-details
+                            ></v-text-field>                            
                         </div>              
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>                                    
-                                    <th>Descripcion</th>  
-                                    <th>Foto</th>  
-                                    <th>Acciones</th>                                    
-                                    <!--<th>Bio</th>                                    
-                                    <th>Editar</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(categoria,i) in categorias" :key="i">
-                                    <td>{{i+1}}</td>
-                                    <td>{{categoria.nombre_categoria}}</td>
-                                    <td>{{categoria.descripcion_categoria}}</td>   
-                                    <td><img :src="'img/categorias/'+categoria.foto" class="img-responsive" height="50" width="50"></td>                                 
-                                    <!--<td>{{user.bio}}</td>-->                                
-
-                                    <td class="justify-items-center">
-                                        <a href="#">
-                                            <i class="fa fa-edit" @click="editModal(categoria)"></i>
-                                        </a>
-                                        /
-                                        <a href="#" @click="deletecategoria(categoria.id)">
-                                            <i class="fa fa-trash" style="color: red"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                                                 
-                            </tbody>
-                        </table>
-                    </div>
-                    
+                    <v-card>                        
+                        <v-data-table
+                            :headers="headers"
+                            :items="categorias"
+                            :search="search"
+                        >   
+                            <template v-slot:item.foto="{ item }">
+                                <div class="p-2">
+                                    <v-img :src="'img/categorias/'+item.foto" :alt="item.foto" width="50px" height="50px"></v-img>
+                                </div>
+                            </template>
+                            <template v-slot:item.accion="{ item }">
+                                <a href="#">
+                                    <i class="fa fa-edit" @click="editModal(item)"></i>
+                                </a>
+                                /
+                                <a href="#" @click="deleteCategoria(item.id)">
+                                    <i class="fa fa-trash red"></i>
+                                </a>
+                            </template>
+                        </v-data-table>
+                    </v-card>                    
                 </div>
                 <!-- /.card -->
             </div>
@@ -123,15 +118,27 @@
     export default {          
         data() {
             return {                
-                editmode: false,
-                categorias : [],
+                editmode: false,                
                 foto: [],
                 form: new Form({ 
                     id : '',                   
                     nombre_categoria : '',                    
                     descripcion_categoria : '',  
                     foto : '',                                     
-                })
+                }),
+                search: '',
+                headers: [
+                    {
+                        text: 'Nombre',
+                        align: 'start',
+                        sortable: false,
+                        value: 'nombre_categoria',
+                    },                    
+                    { text: 'Descripción', value: 'descripcion_categoria' },                    
+                    { text: 'Foto', value: 'foto' },                              
+                    { text: 'Acciones', value: 'accion' },
+                ],
+                categorias : [],
             }
         },
         mounted() {
@@ -168,7 +175,7 @@
                 this.form.reset();
                 $('#addNew').modal('show');
             },
-            deletecategoria(id){
+            deleteCategoria(id){
                 Swal.fire({
                     title: 'Estas Seguro?',
                     text: "Esta accion no se puede revertir!",

@@ -1,4 +1,6 @@
 <template>
+<div class="container">
+  <div class="imagen_home"></div>
   <v-carousel 
     :show-arrows="false" 
     cycle
@@ -10,6 +12,7 @@
         :src="'img/carrusel/'+imagen.foto"                                       
     ></v-carousel-item>   
   </v-carousel>   
+</div>
 </template>
 
 <script>

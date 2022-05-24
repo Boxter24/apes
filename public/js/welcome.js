@@ -15,3 +15,6 @@ $(window).scroll(function() {
         $('.nav').removeClass('affix');
     }
 });
+$(window).on('load', function(){
+    $(".loader").fadeOut("slow");
+});

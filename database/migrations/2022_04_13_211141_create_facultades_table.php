@@ -16,7 +16,7 @@ class CreateFacultadesTable extends Migration
         Schema::create('facultades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_facultad');
-            $table->string('descripcion_facultad')->nullable(); 
+            $table->string('descripcion_facultad'); 
             $table->string('foto')->nullable()->default('facultad.png'); 
         });
     }

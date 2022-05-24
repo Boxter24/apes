@@ -33,7 +33,11 @@ class CarruselController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {                   
+    {           
+        $this->validate($request,[                                 
+            'foto' => 'required',                       
+        ]);
+
         $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
 
         \Image::make($request->foto)->save(public_path('img/carrusel/').$name);
@@ -83,6 +87,10 @@ class CarruselController extends Controller
      */
     public function update(Request $request, Carrusel $carrusel)
     {   
+        $this->validate($request,[                                 
+            'foto' => 'required',                       
+        ]);
+        
         //Verificar si la foto esta en base64
         if(strlen($request->foto)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];

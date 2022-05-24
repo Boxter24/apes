@@ -22,15 +22,34 @@
                 elevation="5"
                 v-for="foro in foros"
                 :key="foro.id"
+                class="card-foro"
             >   
                 <div class="titulos d-flex justify-space-between">
                     <v-card-title>{{foro.nombre_foro}}</v-card-title>
                     <div class="datos">
-                        <p class="titulosDatos">Fecha de Publicación: 22-04-2021</p>
-                        <p class="titulosDatos">Publicado por José Q.</p>
+                        <p class="titulosDatos">Fecha de Publicación: {{foro.fecha_publicacion}}</p>
+                        <p class="titulosDatos">Publicado por {{foro.name}}.</p>
                     </div>
                 </div>                
                 <v-card-text>{{foro.comentario_foro}}</v-card-text>
+                <router-link :to="`/comentarios?foro=${foro.id}`" class="linkComentarios">
+                    <v-row
+                        align="center"
+                        justify="space-around"
+                        class="contenedor-boton-comentar"
+                    >
+                        <v-btn
+                            tile
+                            color="success"
+                            class="comentar-foro"
+                        >
+                        <v-icon left>
+                            mdi-pencil
+                        </v-icon>
+                            Comentar
+                        </v-btn>
+                    </v-row>
+                </router-link>
             </v-card>
         </div>
 

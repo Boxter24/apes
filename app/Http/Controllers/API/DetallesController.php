@@ -37,6 +37,15 @@ class DetallesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nombre_institucion' => 'required|string|max:20',
+            'telefono_institucion' => 'required|string|max:11',       
+            'descripcion_institucion' => 'required|string|max:30',                                       
+            'direccion_institucion' => 'required|string|max:30',                       
+            'correo_institucion' => 'required|string|max:30',                       
+            'foto' => 'required',                       
+        ]);
+
         $name = time().'.' . explode('/', explode(':', substr($request->logo_institucion, 0, strpos($request->logo_institucion, ';')))[1])[1];
 
         \Image::make($request->logo_institucion)->save(public_path('img/detalles/').$name);
@@ -82,6 +91,14 @@ class DetallesController extends Controller
      */
     public function update(Request $request, Detalles $detalle)
     {   
+        $this->validate($request,[
+            'nombre_institucion' => 'required|string|max:20',
+            'telefono_institucion' => 'required|string|max:11',       
+            'descripcion_institucion' => 'required|string|max:150',                                       
+            'direccion_institucion' => 'required|string|max:150',                       
+            'correo_institucion' => 'required|string|max:30',                                                          
+        ]);
+
         if(strlen($request->logo_institucion)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->logo_institucion, 0, strpos($request->logo_institucion, ';')))[1])[1];
 

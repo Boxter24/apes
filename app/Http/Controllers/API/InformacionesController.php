@@ -35,6 +35,12 @@ class InformacionesController extends Controller
      */
     public function store(Request $request)
     {   
+        $this->validate($request,[
+            'nombre_informacion' => 'required|string|max:20',
+            'descripcion_informacion' => 'required|string|max:30',            
+            'foto' => 'required',            
+        ]);
+
         if(isset($request->foto)){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
 
@@ -86,6 +92,12 @@ class InformacionesController extends Controller
      */
     public function update(Request $request, Informaciones $informacione)
     {   
+        $this->validate($request,[
+            'nombre_informacion' => 'required|string|max:50',
+            'descripcion_informacion' => 'required|string|max:250',            
+            'foto' => 'required',            
+        ]);
+        
         //Verificar si la foto esta en base64
         if(strlen($request->foto)  > 20){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];

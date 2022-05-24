@@ -18,7 +18,7 @@ class CreateDetallesTable extends Migration
             $table->string('nombre_institucion');
             $table->string('descripcion_institucion')->nullable();
             $table->string('direccion_institucion');
-            $table->bigInteger('telefono_institucion');
+            $table->string('telefono_institucion');
             $table->string('correo_institucion')->unique();
             $table->string('servicios_institucion')->nullable();
             $table->string('logo_institucion')->nullable()->default('logo_institucion.png'); 

@@ -16,7 +16,7 @@ class CreateSeccionesTable extends Migration
         Schema::create('secciones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_seccion');
-            $table->string('descripcion_seccion')->nullable();            
+            $table->string('descripcion_seccion');            
             $table->unsignedInteger('id_carrera');
             $table->unsignedInteger('id_categoria');
             $table->string('foto')->default('seccion.png');            

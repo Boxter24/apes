@@ -40,7 +40,7 @@
                 <v-text-field 
                     label="Telefono" 
                     v-model="form.telefono_institucion" 
-                    type="number" 
+                    type="string" 
                     require
                     name="nombre_institucion"    
                     prepend-icon="fa-solid fa-square-pen"                               
@@ -99,9 +99,11 @@
                   clearable
                   label="Logo" 
                   @change="Logo" 
-                  name="photo" 
-                  prepend-icon="mdi-camera">
-              </v-file-input>                                    
+                  name="foto" 
+                  prepend-icon="mdi-camera"
+                  :class="{ 'is-invalid': form.errors.has('foto') }">
+              </v-file-input>         
+              <has-error :form="form" field="foto"></has-error>                           
           </div>          
                                                                                                                                                                                                                                                                                                                     
           <div class="modal-footer">

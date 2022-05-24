@@ -187,7 +187,7 @@
                     let reader = new FileReader();  
                     let size = e.size;              
                     //console.log(reader);
-                    let limit = 1024 * 1024 * 2;
+                    let limit = 2024 * 2024 * 4;
                     if(size > limit){
                         Swal.fire({
                             type: 'error',
