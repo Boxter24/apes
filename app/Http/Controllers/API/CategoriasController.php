@@ -41,7 +41,7 @@ class CategoriasController extends Controller
     {
         $this->validate($request,[
             'nombre_categoria' => 'required|string|max:12',
-            'descripcion_categoria' => 'required|string|max:11',                                          
+            'descripcion_categoria' => 'required|string|max:12',                                          
             'foto' => 'required',                       
         ]);
 
@@ -90,7 +90,7 @@ class CategoriasController extends Controller
     {   
         $this->validate($request,[
             'nombre_categoria' => 'required|string|max:12',
-            'descripcion_categoria' => 'required|string|max:11',                                                                            
+            'descripcion_categoria' => 'required|string|max:12',                                                                            
         ]);
 
         //Verificar si la foto esta en base64

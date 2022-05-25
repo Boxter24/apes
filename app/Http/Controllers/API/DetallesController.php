@@ -40,8 +40,8 @@ class DetallesController extends Controller
         $this->validate($request,[
             'nombre_institucion' => 'required|string|max:20',
             'telefono_institucion' => 'required|string|max:11',       
-            'descripcion_institucion' => 'required|string|max:30',                                       
-            'direccion_institucion' => 'required|string|max:30',                       
+            'descripcion_institucion' => 'required|string|max:40',                                       
+            'direccion_institucion' => 'required|string|max:40',                       
             'correo_institucion' => 'required|string|max:30',                       
             'foto' => 'required',                       
         ]);

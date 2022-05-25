@@ -42,8 +42,8 @@ class ForosController extends Controller
     public function store(Request $request)
     {               
         $this->validate($request,[
-            'nombre_foro' => 'required|string|max:20',
-            'comentario_foro' => 'required|string|max:30',                       
+            'nombre_foro' => 'required|string|max:50',
+            'comentario_foro' => 'required|string|max:150',                       
         ]);
 
         $id = Auth::id();
@@ -106,8 +106,8 @@ class ForosController extends Controller
     public function update(Request $request, Foros $foro)
     {           
         $this->validate($request,[
-            'nombre_foro' => 'required|string|max:20',
-            'comentario_foro' => 'required|string|max:30',                       
+            'nombre_foro' => 'required|string|max:50',
+            'comentario_foro' => 'required|string|max:150',                       
         ]);
           
         $foro->update($request->all());

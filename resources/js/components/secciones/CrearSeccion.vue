@@ -39,7 +39,7 @@
                                 </a>
                                 /
                                 <a href="#" @click="deleteSeccion(item.id)">
-                                    <i class="fa fa-trash red"></i>
+                                    <i class="fa fa-trash" style="color: red"></i>
                                 </a>
                             </template>
                         </v-data-table>
@@ -117,6 +117,18 @@
                                 <has-error :form="form" field="id_categoria"></has-error>
                             </div>
 
+                            <div class="form-group">
+                                <v-text-field 
+                                    label="Enlace"  
+                                    v-model="form.enlace_seccion" 
+                                    type="text" 
+                                    name="enlace_seccion"                                    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('enlace_seccion') }">
+                                </v-text-field>
+                                <has-error :form="form" field="enlace_seccion"></has-error>
+                            </div> 
+
                             <div class="form-group">                                
                                 <v-file-input  
                                     v-model="foto"                                    
@@ -159,6 +171,7 @@
                     descripcion_seccion : '', 
                     id_carrera : '',
                     id_categoria : '',                     
+                    enlace_seccion : '',  
                     foto : '',                                     
                 }),
                 search: '',
@@ -173,6 +186,7 @@
                     { text: 'Carrera', value: 'nombre_carrera' },                    
                     { text: 'Categoria', value: 'nombre_categoria' },                    
                     { text: 'Foto', value: 'foto' },                              
+                    { text: 'Enlace', value: 'enlace_seccion' },      
                     { text: 'Acciones', value: 'accion' },
                 ],
                 secciones : [],

@@ -39,7 +39,7 @@
                 <!-- cc = Carrera - Categoria -->
                 <!-- Para buscar seccion por carrera y categoria -->
                 <v-hover v-slot="{ hover }">
-                    <router-link :to="`/secciones?cc=${id_carrera}`+categoria.id">
+                    <router-link :to="`/secciones?cc=${id_carrera}-`+categoria.id">
                         <v-card
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"

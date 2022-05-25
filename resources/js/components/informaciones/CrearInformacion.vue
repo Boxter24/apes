@@ -39,7 +39,7 @@
                                 </a>
                                 /
                                 <a href="#" @click="deleteInformacion(item.id)">
-                                    <i class="fa fa-trash red"></i>
+                                    <i class="fa fa-trash" style="color: red"></i>
                                 </a>
                             </template>
                         </v-data-table>
@@ -86,6 +86,18 @@
                                     :class="{ 'is-invalid': form.errors.has('descripcion_informacion') }">
                                 </v-textarea>
                                 <has-error :form="form" field="descripcion_informacion"></has-error>
+                            </div>  
+
+                            <div class="form-group">
+                                <v-text-field 
+                                    label="Enlace" 
+                                    v-model="form.enlace_informacion" 
+                                    type="text" 
+                                    name="enlace_informacion"                                    
+                                    prepend-icon="fa-solid fa-square-pen"                               
+                                    :class="{ 'is-invalid': form.errors.has('enlace_informacion') }">
+                                </v-text-field>
+                                <has-error :form="form" field="enlace_informacion"></has-error>
                             </div>  
 
                             <div class="form-group">                                

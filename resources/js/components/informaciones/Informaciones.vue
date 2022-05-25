@@ -36,6 +36,7 @@
                     <v-card-actions class="text-justify">
                         {{informacion.descripcion_informacion}}
                     </v-card-actions>
+                    <span v-if="informacion.enlace_informacion"><a target="_blank" :href="informacion.enlace_informacion">Ver más...</a></span>
                 </v-card>
                 <v-card
                     v-if="informacion.foto == null && i<=5"
@@ -57,7 +58,7 @@
                                 text
                                 color="deep-purple accent-4"
                             >
-                                Ver más...
+                                <span v-if="informacion.enlace_informacion"><a target="_blank" :href="informacion.enlace_informacion">Ver más...</a></span>
                             </v-btn>
                         </v-card-actions>
                     </div>

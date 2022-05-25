@@ -8,6 +8,8 @@
 
 .titulo-seccion{
     font-family: 'Alfa Slab One', cursive;
+    margin-top: 15px; 
+    margin-left: 10px;
 }
 
 .info{    
@@ -75,4 +77,8 @@ a.linkComentarios{
     margin-left: auto!important;
     margin-right: auto!important;
     margin-top: 2em!important;
+}
+
+.v-card__title{
+    font-size: calc(100%)!important;
 }

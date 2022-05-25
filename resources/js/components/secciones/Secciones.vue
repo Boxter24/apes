@@ -1,5 +1,5 @@
 <template>    
-    <v-container fluid class="pa-6 text-left">
+    <v-container fluid class="pa-6 text-left" style="padding-bottom: 5em!important">
         <div class="titulo-seccion">
             Lista de Secciones
         </div>
@@ -63,6 +63,7 @@
                                 <!--<div>Whitehaven Beach</div>-->
 
                                 <div>{{seccion.descripcion_seccion}}</div>
+                                <span v-if="seccion.enlace_seccion"><a target="_blank" :href="seccion.enlace_seccion">Ver más...</a></span>
                             </v-card-text> 
                         </div>                                                  
                     </v-card>                    
@@ -83,7 +84,8 @@ export default {
         nombre_seccion: '',                            
         descripcion_seccion: '',  
         id_carrera: '',
-        id_categoria: '',                  
+        id_categoria: '', 
+        enlace_seccion: '',                  
         foto: '',       
       }),                  
       transparent: 'rgba(255, 255, 255, 0)',

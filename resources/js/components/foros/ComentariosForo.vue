@@ -21,7 +21,7 @@
                     mdi-plus
                 </v-icon>
             </v-btn>
-            <p class="titulo-seccion align-center" style="margin-top: 15px; margin-left: 10px;">Añadir Respuesta</p>
+            <p class="titulo-seccion align-center">Añadir Respuesta</p>
         </div>  
         <div class="titulo-seccion" style="margin-top: 15px">
             Respuestas:  

@@ -39,7 +39,7 @@
                                 </a>
                                 /
                                 <a href="#" @click="deleteUser(item.id)">
-                                    <i class="fa fa-trash red"></i>
+                                    <i class="fa fa-trash" style="color: red"></i>
                                 </a>
                             </template>
                         </v-data-table>

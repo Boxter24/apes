@@ -19,7 +19,7 @@ class SeccionesController extends Controller
         $secciones = DB::table('secciones')
         ->leftjoin('carreras','secciones.id_carrera','=','carreras.id')
         ->leftjoin('categorias','secciones.id_categoria','=','categorias.id')
-        ->select('secciones.id','nombre_seccion','descripcion_seccion',"secciones.foto",'id_carrera','nombre_carrera','id_categoria','nombre_categoria')
+        ->select('secciones.id','nombre_seccion','descripcion_seccion',"secciones.foto",'id_carrera','nombre_carrera','id_categoria','nombre_categoria','enlace_seccion')
         ->get();
 
         return response()->json($secciones);        
@@ -45,7 +45,7 @@ class SeccionesController extends Controller
     public function store(Request $request)
     {   
         $this->validate($request,[
-            'nombre_seccion' => 'required|string|max:20',
+            'nombre_seccion' => 'required|string|max:50',
             'descripcion_seccion' => 'required|string|max:150',
             'id_carrera' => 'required',
             'id_categoria' => 'required',
@@ -72,10 +72,12 @@ class SeccionesController extends Controller
      */
     public function show($seccione)
     {   
-        $carrera = substr($seccione, 0, 1);
+        $parametros = explode("-", $seccione);
+        
+        $carrera = $parametros[0];
 
-        $categoria = substr($seccione, 1, 2);;
-
+        $categoria = $parametros[1];
+        
         $secciones = DB::table('secciones')
         ->where('id_carrera','=',$carrera)
         ->where('id_categoria','=',$categoria)
@@ -104,7 +106,7 @@ class SeccionesController extends Controller
     public function update(Request $request, Secciones $seccione)
     {   
         $this->validate($request,[
-            'nombre_seccion' => 'required|string|max:20',
+            'nombre_seccion' => 'required|string|max:50',
             'descripcion_seccion' => 'required|string|max:150',
             'id_carrera' => 'required',
             'id_categoria' => 'required',

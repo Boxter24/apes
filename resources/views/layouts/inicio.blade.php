@@ -58,7 +58,7 @@
                                             
                                             <li><option-navbar></option-navbar></li>
 
-                                            <li><a href="{{ url('/informaciones') }}">Informacion</a></li>
+                                            <li><a href="{{ url('/informaciones') }}">Información</a></li>
 
                                             <li><a href="{{ url('/foros') }}">Foros</a></li>
                                              
@@ -90,13 +90,15 @@
                         </div>
                     </nav>       
                 </header>
-                <main class="mainFondo">
+                
+                <main class="mainFondo">                    
                     <div class="content-wrapper main">            
                         <!--MAIN CONTENT-->
                         <div class="content">
                             <div class="container-fluid">
                                 <vue-progress-bar> </vue-progress-bar>   
-                                <v-app class="mt-4">                             
+                                <v-app class="mt-4">    
+                                    <div class="fondo"></div>                         
                                     <router-view></router-view>
                                 </v-app>
                             </div>

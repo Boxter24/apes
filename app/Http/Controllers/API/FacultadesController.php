@@ -36,8 +36,8 @@ class FacultadesController extends Controller
     public function store(Request $request)
     {         
         $this->validate($request,[
-            'nombre_facultad' => 'required|string|max:11',
-            'descripcion_facultad' => 'required|string|max:11',   
+            'nombre_facultad' => 'required|string|max:12',
+            'descripcion_facultad' => 'required|string|max:12',   
             'foto' => 'required',                                           
         ]);
 
@@ -91,8 +91,8 @@ class FacultadesController extends Controller
     public function update(Request $request, Facultades $facultade)
     {   
         $this->validate($request,[
-            'nombre_facultad' => 'required|string|max:11',
-            'descripcion_facultad' => 'required|string|max:11',               
+            'nombre_facultad' => 'required|string|max:12',
+            'descripcion_facultad' => 'required|string|max:12',               
         ]);
 
         //Verificar si la foto esta en base64

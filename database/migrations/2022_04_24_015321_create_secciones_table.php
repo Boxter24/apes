@@ -19,7 +19,8 @@ class CreateSeccionesTable extends Migration
             $table->string('descripcion_seccion');            
             $table->unsignedInteger('id_carrera');
             $table->unsignedInteger('id_categoria');
-            $table->string('foto')->default('seccion.png');            
+            $table->string('enlace_seccion')->default('null');            
+            $table->string('foto')->default('seccion.png');                        
 
             $table->foreign('id_carrera')
                   ->references('id')->on('carreras')
