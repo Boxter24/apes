@@ -45,6 +45,10 @@ Route::resource('foros', API\ForosController::class)->middleware('auth:api');
 
 Route::resource('comentarios', API\ComentariosController::class)->middleware('auth:api');
 
+Route::resource('guias', API\GuiasController::class);
+
+Route::resource('pasos', API\PasosController::class);
+
 
 
 

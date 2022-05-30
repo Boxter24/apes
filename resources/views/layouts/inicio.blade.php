@@ -61,6 +61,8 @@
                                             <li><a href="{{ url('/informaciones') }}">Información</a></li>
 
                                             <li><a href="{{ url('/foros') }}">Foros</a></li>
+
+                                            <li><a href="{{ url('/guias') }}">Guías</a></li>
                                              
                                             <li><a style="hover: rgb(65, 3, 15)" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();

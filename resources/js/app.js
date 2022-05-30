@@ -94,6 +94,12 @@ let routes = [
     { path: '/foros', component: require('./components/foros/Foros.vue').default },
     { path: '/comentarios', component: require('./components/foros/ComentariosForo.vue').default },
     
+    { path: '/crearGuia', component: require('./components/guias/CrearGuia.vue').default },   
+    { path: '/guias', component: require('./components/guias/Guias.vue').default },   
+    
+    { path: '/crearPasos', component: require('./components/pasos/Crearpaso.vue').default },     
+    { path: '/pasos', component: require('./components/pasos/Pasos.vue').default },    
+
     //PERSONALIZACION
     { path: '/carrusel', component: require('./components/personalizacion/Carrusel.vue').default },
     { path: '/colores', component: require('./components/personalizacion/Colores.vue').default },

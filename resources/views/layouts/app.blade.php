@@ -25,62 +25,63 @@
     
 </head>
 <body>
-    <header>
-        <nav class="nav">
-            <div class="container">
-                <div class="logo">
-                    <img src="{{ asset('img/logo.png') }}" alt="Logo">
-                    <a class="nombre_logo" href="#">APES</a>
-                </div>                                
-                <div id="mainListDiv" class="main_list">                     
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navlinks">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li>
-                                <a href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
-                            </li>
-                            @if (Route::has('register'))
+    <div id="app">
+        <header>
+            <nav class="nav">
+                <div class="container">
+                    <div class="logo">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo">
+                        <a class="nombre_logo" href="#">APES</a>
+                    </div>                                
+                    <div id="mainListDiv" class="main_list">                     
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navlinks">
+                            <!-- Authentication Links -->
+                            @guest
                                 <li>
-                                    <a href="{{ route('register') }}">{{ __('Registrarme') }}</a>
+                                    <a href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
                                 </li>
-                            @endif     
+                                @if (Route::has('register'))
+                                    <li>
+                                        <a href="{{ route('register') }}">{{ __('Registrarme') }}</a>
+                                    </li>
+                                @endif     
+                                    <li>
+                                        <a href="">¿Quiénes Somos?</a>
+                                    </li>                       
+                            @else
                                 <li>
-                                    <a href="">¿Quiénes Somos?</a>
-                                </li>                       
-                        @else
-                            <li>
-                                <a>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                    <a>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                    <div>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                    </div>
+                    <span class="navTrigger">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
                 </div>
-                <span class="navTrigger">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </span>
-            </div>
-        </nav>
-    </header>
-    <main class="main py-4">
-        @yield('content')
-    </main>
-    
+            </nav>
+        </header>
+        <main class="main py-4">
+            @yield('content')
+        </main>
+    </div>
 
     <!-- Script -->
     <script src="{{ asset('js/welcome.js') }}" defer></script>
